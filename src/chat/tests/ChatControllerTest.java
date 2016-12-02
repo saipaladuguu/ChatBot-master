@@ -35,4 +35,4 @@ public class ChatControllerTest
 		assertTrue("Incorrect data type", testController.getChatbot() instanceof Chatbot);
 	}
 
-}
+} 
