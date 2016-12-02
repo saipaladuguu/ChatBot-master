@@ -1,6 +1,10 @@
 package chat.tests;
 
 import static org.junit.Assert.*;
+public class ChatPanelTest
+{package chat.tests;
+
+import static org.junit.Assert.*;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;

@@ -1,6 +1,7 @@
 package chat.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base version of the 2016 Chatbot class. Only stub methods are provided. Students will complete methods as part
@@ -10,8 +11,15 @@ import java.util.ArrayList;
  */
 public class Chatbot
 {
-	private ArrayList<String> memesList;
+	/**
+	 * The list of memes. 
+	 */
+	private List<String> memesList;
+	/**
+	 * The list of political topics.
+	 */
 	private ArrayList<String> politicalTopicList;
+	private ArrayList<String> HTMLList;
 	private String userName;
 	private String content;
 	
@@ -21,20 +29,87 @@ public class Chatbot
 	 */
 	public Chatbot(String userName)
 	{
-		this.memesList = new ArrayList<String>();
 		this.politicalTopicList = new ArrayList<String>();
+		this.memesList = new ArrayList<String>();
+		this.HTMLList = new ArrayList<String>();
 		this.userName = userName;
-		this.content = new String("content");
+		this.content = new String("Sample");
+		this.buildMemesList();
+		this.buildPoliticalTopicsList();
+		this.buildHTMLList();
+		
 	}
 	
 	private void buildMemesList()
 	{
-		
+		memesList.add("doge");
+		memesList.add("pupper");
+		memesList.add("cute animals");
+		memesList.add("grumpy cat");
+		memesList.add("dat boi");
+		memesList.add("willy wonka");
+		memesList.add("harambe");
+		memesList.add("john cena");
+		memesList.add("doggo");
+		memesList.add("troll face");
+		memesList.add("drake");
+		memesList.add("ken bone");
+		memesList.add("vaporwave");
+		memesList.add("facepalm");
+		memesList.add("furries");
+		memesList.add("anime");
+		memesList.add("pen pineapple apple pen");
+		memesList.add("loss comic");
+		memesList.add("slender man");
+		memesList.add("pewdiepie");
+		memesList.add("bad luck brian");
 	}
 	
 	private void buildPoliticalTopicsList()
+	{	
+		politicalTopicList.add("Democrat");
+		politicalTopicList.add("Republican");
+		politicalTopicList.add("11/8/16");
+		politicalTopicList.add("liberal");
+		politicalTopicList.add("conservative");
+		politicalTopicList.add("Clinton");
+		politicalTopicList.add("Hillary");
+		politicalTopicList.add("Trump");
+		politicalTopicList.add("Kaine");
+		politicalTopicList.add("Pence");
+		politicalTopicList.add("Stein");
+		politicalTopicList.add("Johnson");
+		politicalTopicList.add("election");
+		politicalTopicList.add("James Falls");
+		politicalTopicList.add("Ken Bone");
+		politicalTopicList.add("Jim Fell");
+		politicalTopicList.add("Jimmy Fellen");
+		politicalTopicList.add("Misty K Snow");
+		politicalTopicList.add("Here come dat Garry Johnson");
+		politicalTopicList.add("nukes");
+		politicalTopicList.add("islamaphobia");
+		politicalTopicList.add("foreign policy");
+		politicalTopicList.add("United Nations");
+		politicalTopicList.add("UN");
+		politicalTopicList.add("America");
+	}
+	
+	private void buildHTMLList()
 	{
-		
+		HTMLList.add("<>");
+		HTMLList.add("< >");
+		HTMLList.add("<B> </B>");
+		HTMLList.add("<B> ");
+		HTMLList.add("<I> sdadas </i>");
+		HTMLList.add("<P>");
+		HTMLList.add("<A HREF=\"sdfs.html\"> </a>");
+		HTMLList.add("<A HREF> </a>");
+	}
+	
+	
+	private void buildContent()
+	{
+	
 	}
 	
 	/**
@@ -46,10 +121,12 @@ public class Chatbot
 	public boolean lengthChecker(String currentInput)
 	{
 		boolean hasLength = false;
-		if(currentInput !=null && currentInput.length() > 0)
+		
+		if (currentInput != null && currentInput.length() > 0)
 		{
 			hasLength = true;
 		}
+		
 		return hasLength;
 	}
 	
@@ -60,7 +137,16 @@ public class Chatbot
 	 */
 	public boolean contentChecker(String currentInput)
 	{
-		return false;
+		boolean hasContent = false;
+		
+		String temp = "↷";
+		System.out.println(temp + temp.toLowerCase());
+		
+		if (currentInput.toLowerCase().contains(content.toLowerCase()))
+		{
+			hasContent = true;
+		}
+		return hasContent;
 	}
 	
 	/**
@@ -71,10 +157,18 @@ public class Chatbot
 	 */
 	public boolean politicalTopicChecker(String currentInput)
 	{
-		return false;
+		boolean hasTopic = false;
+		
+		for(int index = 0; index < politicalTopicList.size(); index++)
+		{
+			if(currentInput.equals(politicalTopicList.get(index)))
+			{
+				hasTopic = true;
+			}
+		}
+		return hasTopic;
 	}
-	
-	
+		
 	/**
 	 * Checks to see that the supplied String value is in the current memesList variable.
 	 * @param currentInput The supplied String to be checked.
@@ -82,32 +176,139 @@ public class Chatbot
 	 */
 	public boolean memeChecker(String currentInput)
 	{
-		return false;
+		boolean hasMeme = false;
+		
+		for(int index = 0; index < memesList.size(); index++)
+		{
+			if(currentInput.equals(memesList.get(index)))
+			{
+				hasMeme = true;
+			}
+		}
+		return hasMeme;
+	}
+	/**
+	 * Checks to see if the currentInput has html information or tags
+	 * @param currentInput
+	 * @return
+	 */
+	public boolean inputHTMLChecker(String currentInput)
+	{
+		boolean htmlPresent = false; 
+		
+		if(currentInput.contains("<P>"))
+		{
+			htmlPresent = true;
+		}
+		else if(currentInput.contains("<A HREF=\""))
+		{
+			int index = currentInput.indexOf("<A HREF=\"") + 9;
+			String sub = currentInput.substring(index);
+			
+			if(sub.contains("\">"))
+			{
+				int index2 = sub.indexOf("\">");
+				String sub2 = sub.substring(index2);
+				
+				if(sub2.contains(" </a>"))
+				{
+					htmlPresent = true;
+				}
+			}
+		}
+		else if(currentInput.contains("<"))
+		{
+			String lower = currentInput.toLowerCase();
+			int openIndex1 = lower.indexOf("<") + 1;
+			String tag = "";
+			if(lower.contains(">"))
+			{
+				int openIndex2 = lower.indexOf(">");
+				tag = lower.substring(openIndex1, openIndex2);
+				
+				String sub = lower.substring(openIndex2 + 1);
+				
+				if(sub.contains("</" + tag + ">"))
+				{
+					htmlPresent = true;
+				}
+			}
+		}
+		return htmlPresent;
 	}
 	
+	
 	/**
-	 * Returns the username of this Chatbot instance.
-	 * @return The username of the Chatbot.
+	 * Checks the currentInput for twitter tags or username
+	 * @param currentInput
+	 * @return
+	 */
+	public boolean twitterChecker(String currentInput)
+	{
+		boolean twitterCheckerOn = false;
+		String sample = currentInput.replaceAll(" ", "");
+		if(sample.length() > 1&& !currentInput.startsWith(" "))
+		{
+			twitterCheckerOn = true;
+		}
+		return twitterCheckerOn;
+	}
+	/**
+	 * Checks to see if the currentInput is asking to exit, and exits if present. 
+	 * @param currentInput
+	 * @return
+	 */
+	public boolean quitChecker(String currentInput)
+	{
+		boolean assertQuit = false;
+		
+		if(currentInput.equalsIgnoreCase("Quit"))
+		{
+			assertQuit = true;
+		}
+		else if(currentInput.equalsIgnoreCase("Exit"))
+		{
+			assertQuit = false;
+		}
+		return assertQuit;
+	}
+	public boolean keyboardMashChecker(String currentInput)
+	{
+		boolean keyboardMash = false;
+		
+		if (currentInput.equalsIgnoreCase("sdf") || currentInput.equalsIgnoreCase("dfg") || currentInput.equalsIgnoreCase("cvb") || currentInput.equalsIgnoreCase(",./"))
+		{
+			keyboardMash = true;
+		}
+		
+		return keyboardMash;
+	}
+	
+	
+	//GETTERS-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Getter method for UserName object.
+	 * @return
 	 */
 	public String getUserName()
 	{
 		return userName;
 	}
-	
 	/**
 	 * Returns the content area for this Chatbot instance.
 	 * @return The content area for this Chatbot instance.
 	 */
 	public String getContent()
 	{
-		return content;
+	return content;
 	}
 	
 	/**
 	 * Getter method for the memesList object.
 	 * @return The reference to the meme list.
 	 */
-	public ArrayList<String> getMemesList()
+	public List<String> getMemesList()
 	{
 		return memesList;
 	}
@@ -125,8 +326,13 @@ public class Chatbot
 	 * Updates the content area for this Chatbot instance.
 	 * @param content The updated value for the content area.
 	 */
+	
+	//SETTERS-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
 	public void setContent(String content)
 	{
 		this.content = content;
 	}
 }
+
+

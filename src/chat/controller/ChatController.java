@@ -10,7 +10,7 @@ public class ChatController
 	
 	public ChatController()
 	{
-		stupidBot = new Chatbot("Boaty McBoatface");
+		stupidBot = new Chatbot("Pablo");
 		chatView = new ChatViewer();
 	}
 	
